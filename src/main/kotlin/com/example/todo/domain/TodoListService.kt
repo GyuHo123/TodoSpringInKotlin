@@ -1,11 +1,8 @@
-import com.example.todo.domain.TodoDTO
-import com.example.todo.domain.toDTO
-import com.example.todo.domain.toEntity
+package com.example.todo.domain
+
 import com.example.todo.repository.TodoRepository
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.stereotype.Service
 
-@ComponentScan("com.example.todo.domain")
 @Service
 class TodoListService(private val repository: TodoRepository) {
     fun getAllTodos(): List<TodoDTO> {
@@ -24,12 +21,7 @@ class TodoListService(private val repository: TodoRepository) {
     }
 
     fun updateTodoById(id: Long, todoDTO: TodoDTO): TodoDTO {
-        val entity = repository.findById(id).orElseThrow { TodoNotFoundException() }.apply {
-            name = todoDTO.name
-            description = todoDTO.description
-            dueDate = todoDTO.dueDate
-            isCompleted = todoDTO.isCompleted
-        }
+        val entity = repository.findById(id).orElseThrow { TodoNotFoundException() }
         val updatedEntity = repository.save(entity)
         return updatedEntity.toDTO()
     }
