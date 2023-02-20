@@ -22,6 +22,10 @@ class TodoListService(private val repository: TodoRepository) {
 
     fun updateTodoById(id: Long, todoDTO: TodoDTO): TodoDTO {
         val entity = repository.findById(id).orElseThrow { TodoNotFoundException() }
+        entity.dueDate = todoDTO.dueDate
+        entity.isCompleted = todoDTO.isCompleted
+        entity.description = todoDTO.description
+        entity.name = todoDTO.name
         val updatedEntity = repository.save(entity)
         return updatedEntity.toDTO()
     }
