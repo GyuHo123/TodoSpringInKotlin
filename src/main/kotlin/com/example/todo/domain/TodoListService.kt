@@ -1,6 +1,7 @@
 import com.example.todo.domain.TodoDTO
 import com.example.todo.domain.toDTO
 import com.example.todo.domain.toEntity
+import com.example.todo.repository.TodoRepository
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.stereotype.Service
 

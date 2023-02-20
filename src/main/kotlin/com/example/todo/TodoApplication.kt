@@ -1,6 +1,6 @@
 package com.example.todo
 
-import TodoRepository
+import com.example.todo.repository.TodoRepository
 import com.example.todo.domain.TodoDTO
 import com.example.todo.domain.toDTO
 import com.example.todo.domain.toEntity
@@ -8,20 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.ApplicationContext
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import java.time.LocalDate
 
 @SpringBootApplication
-@EnableJpaRepositories
-@ComponentScan(basePackages = ["com.example.todo.repository"])
 class TodoApplication {
-
 	@Autowired
 	lateinit var repository: TodoRepository
-
 	fun run() {
-		val todoDTO = TodoDTO(
+		val todoDTO= TodoDTO(
 			id = 1,
 			name = "Create a Spring Todo Project",
 			description = "Follow the steps in the tutorial to create a Spring Todo project.",
@@ -37,7 +31,7 @@ class TodoApplication {
 			println("Failed to create Todo.")
 		}
 
-		val allTodos = repository.findAllTodos()
+		val allTodos = repository.findAll()
 
 		allTodos.forEach {
 			println("Todo: ${it.name}")
